@@ -2,21 +2,25 @@ import { useEffect, useState } from "react";
 
 import styles from './ReposList.module.css';
 
-const ReposList = ({ nomeUsuario }) => {
+const ReposList = ({ userUsuario }) => {
     const [repos, setRepos] = useState([]);
     const [estaCarregando, setEstaCarregando] = useState(true);
 
     useEffect(() => {
         setEstaCarregando(true);
-        fetch(`https://api.github.com/users/${nomeUsuario}/repos`)
+        fetch(`https://api.github.com/users/${userUsuario}/repos`)
             .then(res => res.json())
-            .then(resJason => {
+            .then(resJson => {
                 setTimeout(() => {
                     setEstaCarregando(false);
-                    setRepos(resJason);
-                }, 3000);
-            });
-    }, [nomeUsuario])
+                    setRepos(resJson);
+                }, 1000);
+            })
+            .catch(e => {
+                console.log(e)
+            }
+        )
+    }, [userUsuario])
 
     return (
         <div className="container">
@@ -33,7 +37,7 @@ const ReposList = ({ nomeUsuario }) => {
                             <div className={styles.itemLanguage}>
                                 <b>Linguagem:</b> {language}
                             </div>
-                            <a className={styles.itemLink} target="blank_" href={html_url}>Visitar no Github</a>
+                            <a className={styles.itemLink} target="_blank" href={html_url}>Visitar no Github</a>
                         </li>
                     ) )}
                 </ul>

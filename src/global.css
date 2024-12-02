@@ -9,9 +9,17 @@
     max-width: 960px;
     width: 100%;
     margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.container-erro {
+    background-color: var(--corErro);
+    text-align: center;
 }
 
 :root {
     --corPrincipal: #f9ca24;
     --corSecundaria: #111111;
+    --corErro: #ff0000;
 }
